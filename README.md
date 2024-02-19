@@ -31,5 +31,6 @@ Deploy the contract by clicking on the "Deploy & Run Transactions" tab in the le
 
 Interact with the contract by calling its functions. You can transfer tokens, perform assertions, and test revert conditions.
 
-Authors
+Author
+
 Naman Deol [namandeol555@gmail.com]
