@@ -1,24 +1,28 @@
 // SPDX-License-Identifier: MIT
-pragma solidity ^0.8.18;
+pragma solidity ^0.8.0;
 
-contract OwnershipContract {
-    address public owner;
+contract RequireAssertRevertExample {
+    uint public totalSupply = 1000;
+    mapping(address => uint) public balances;
 
-    constructor() {
-        owner = msg.sender;
+    function transfer(address _to, uint _value) public {
+        require(_value > 0, "Value must be greater than 0");
+        require(balances[msg.sender] >= _value, "Insufficient balance");
+
+        balances[msg.sender] -= _value;
+        balances[_to] += _value;
     }
 
-    function onlyOwner() public view {
-        require(msg.sender == owner, "Only the owner can call this function.");
+    function assertExample(uint _x, uint _y) public pure returns (uint) {
+        uint result = _x + _y;
+        assert(result >= _x);
+        return result;
     }
 
-    function onwerHere() public view {
-        if(msg.sender!= owner){
-            revert("The caller is not the owner.");
+    function revertExample(uint _value) public pure returns (uint) {
+        if (_value == 0) {
+            revert("Value cannot be zero");
         }
-    }
-
-    function Owner() public view {
-        assert(msg.sender == owner);
+        return 100 / _value;
     }
 }
